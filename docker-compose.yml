@@ -21,16 +21,16 @@ services:
         context: ./packages/auth-app
         target: development
 #    command: npm run start:inspect
-    command: npm run start:dev
+    command: npm run dev
     env_file:
-      - ./packages/packages/.env
+      - ./packages/auth-app/.env
     environment:
       POSTGRES_HOST: db
     volumes:
-      - ./packages/packages:/usr/src/app
+      - ./packages/auth-app:/usr/src/app
       - /usr/src/app/node_modules
     ports:
-      - ${SERVER_PORT}:${SERVER_PORT}
+      - ${PORT}:${PORT}
       - 9229:9229
     depends_on:
       - db
@@ -38,7 +38,7 @@ services:
     image: postgres:14
     restart: always
     env_file:
-      - packages/packages/.env
+      - packages/auth-app/.env
     environment:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_USER: ${POSTGRES_USER}
